@@ -1,0 +1,18 @@
+<div id="col-main" class="all-collections">
+
+  <section class="diagonal-divider {{ collection.handle }} clearfix">
+    <header class="section-details clearfix">
+      <h2 class="section-title">Product Collections</h2>
+    </header>
+
+    <ul id="collection-grid" class="product-grid">
+    {% for collection in collections %}
+    {% unless collection.handle == 'frontpage' or collection.handle == 'all' %}
+      {% include 'collection-grid-item' %}
+    {% endunless %}
+    {% endfor %}
+    </ul>
+
+  </section>
+ 
+</div><!-- /#col-main -->
