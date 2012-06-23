@@ -14,7 +14,10 @@
 						<a class="product-photo" href="{{ product.url | within: collection }}" title="{{ product.featured_image.alt | escape }}">
 							<img src="{{ product.featured_image | product_img_url: 'original' }}" alt="{{ product.featured_image.alt | escape }}" title="{{product.title}}" width="1000" height="500" />
 						
-							<h2 class="title">{{product.title}}</h2>
+							<div class="caption">
+								<h2 class="title">{{product.title}}</h2>
+								<p class="desc">{{ product.description | strip_html | truncatewords: 40 }}</p>
+							</div>
 						
 						</a>
 					</li>

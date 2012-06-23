@@ -67,10 +67,12 @@ window.flux = {
 		this.options.transitions = newTrans;
 
 		this.images = new Array();
+		this.captions = new Array();		
 		this.imageLoadedCount = 0;
 		this.currentImageIndex = 0;
 		this.nextImageIndex = 1;
 		this.playing = false;
+		this.first = true;
 
 
 		this.container = $('<div class="fluxslider"></div>').appendTo(this.element);
@@ -101,6 +103,7 @@ window.flux = {
 		// Create the placeholders for the current and next image
 		this.image1 = $('<div class="image1" style="height: 100%; width: 100%"></div>').appendTo(this.imageContainer);
 		this.image2 = $('<div class="image2" style="height: 100%; width: 100%"></div>').appendTo(this.imageContainer);
+		this.caption = $('<div class="image2" style="height: 100%; width: 100%"></div>').appendTo(this.imageContainer);		
 
 		$(this.image1).add(this.image2).css({
 			'position': 'absolute',
@@ -109,15 +112,17 @@ window.flux = {
 		});
 		
 		// Get a list of the images to use
-		this.element.find('img, a img').each(function(index, found_img){
-			var imgClone = found_img.cloneNode(false),
-				link = $(found_img).parent();
+		this.element.find('li.sliderLi').each(function(index, found_img){
+			var imgClone = $(found_img).find('img')[0].cloneNode(false),
+				captionClone = $(found_img).find('.caption').clone(),
+				link = $(found_img).find('a');
 
 			// If this img is directly inside a link then save the link for later use
 			if(link.is('a'))
 				$(imgClone).data('href', link.attr('href'));
 
 			_this.images.push(imgClone);
+			_this.captions.push(captionClone);			
 
 			// Remove the images from the DOM
 			$(found_img).remove();
@@ -321,24 +326,25 @@ window.flux = {
 			// Should we use captions?
 			if(this.options.captions)
 			{
-				this.captionBar = $('<div class="caption"></div>').css({
-					background: 'rgba(0,0,0,0.6)',
-					color: '#FFF',
-					'font-size': '16px',
-					'font-family': 'helvetica, arial, sans-serif',
-					'text-decoration': 'none',
-					'font-weight': 'bold',
-					padding: '1.5em 1em',
-					opacity: 0,
-					position: 'absolute',
-					'z-index': 110,
-					width: '100%',
-					bottom: 0
-				}).css3({
-					'transition-property': 'opacity',
-					'transition-duration': '800ms',
-					'box-sizing': 'border-box'
-				}).prependTo(this.surface);
+				// this.captionBar = $('<div class="caption"></div>').css({
+				// 	background: 'rgba(0,0,0,0.6)',
+				// 	color: '#FFF',
+				// 	'font-size': '16px',
+				// 	'font-family': 'helvetica, arial, sans-serif',
+				// 	'text-decoration': 'none',
+				// 	'font-weight': 'bold',
+				// 	padding: '1.5em 1em',
+				// 	opacity: 0,
+				// 	position: 'absolute',
+				// 	'z-index': 110,
+				// 	width: '100%',
+				// 	bottom: 0
+				// }).css3({
+				// 	'transition-property': 'opacity',
+				// 	'transition-duration': '800ms',
+				// 	'box-sizing': 'border-box'
+				// }).prependTo(this.surface);
+				this.captionBar = $('<div class="caption"></div>').prependTo(this.surface);
 			}
 			
 			this.updateCaption();
@@ -403,14 +409,32 @@ window.flux = {
 			this.updateCaption();
 		},
 		updateCaption: function() {
-			var str = $(this.getImage(this.currentImageIndex)).attr('title');
-			if(this.options.captions && this.captionBar)
-			{
-				if(str !== "")
-					this.captionBar.html(str);
-					
-				this.captionBar.css('opacity', str === "" ? 0 : 1);
-			}
+
+			var html = this.captions[this.currentImageIndex].html();
+			var _this = this;
+			//console.log(html);
+
+			this.captionBar.fadeOut(400, function () {
+				var $el = $(this);
+				
+				if (_this.first) {
+					$el.html(html).fadeIn(800);
+					_this.first = false;
+				} else {
+					_this.element.bind('fluxTransitionEnd', function(event) {
+						$el.html(html).fadeIn(800);					
+					});			
+				}		
+			});
+
+			// var str = $(this.getImage(this.currentImageIndex)).attr('title');
+			// if(this.options.captions && this.captionBar)
+			// {
+			// 	if(str !== "")
+			// 		this.captionBar.html(str);
+			// 		
+			// 	this.captionBar.css('opacity', str === "" ? 0 : 1);
+			// }
 		},
 		getImage: function(index) {
 			index = index % this.images.length;

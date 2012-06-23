@@ -50,17 +50,19 @@ h1, h1 a, h2, h2 a, h3, h3 a, h4, h4 a, h5, h5 a, h6, h6 a {
 	font-weight: bold;	
 }
 
-h1{ 
-	font-size: 80px; 
-}
-
 a { 
+	font: {{settings.header_font_style}} 12px/1.0 {{settings.header_font}}; 
 	color: {{ settings.content_link_colour }}; 
+	text-decoration: none;
 }
 
 	a:hover { 
 		color: {{ settings.content_link_hover_colour}} 
 	}
+
+p {
+	font: {{settings.header_font_style}} 12px/1.0 {{settings.header_font}}; 	
+}
 
 input, textarea{
 	border: solid 1px {{ settings.content_secondary_colour }}; 
@@ -92,7 +94,37 @@ button {
 /* Header
 ========================================================================*/
 
-header h1 a {}
+header {
+	height: 160px;
+	width: 1000px;
+	position: relative;
+	
+}
+
+header h1 {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+	header h1 a {
+		text-decoration: none;
+		font-size: 80px;
+		line-height: 100px;
+		display: block;
+	}
+
+header #umbrella {
+	position: absolute;
+	right: 0;
+	top: 0;	
+}
+
+header nav {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
 
 /* Homepage
 ========================================================================*/
@@ -124,19 +156,6 @@ header h1 a {}
 	left: 0;
 }
 
-#slider ul li .title {
-	height: 24px;
-	width: auto;
-	padding: 12px;
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	background-color: rgba(0,0,0,0.5);
-	color: #fff;
-	font-size: 24px;
-	line-height: 24px;
-}
-
 /*Flux*/
 
 #slider .fluxslider {
@@ -144,3 +163,27 @@ header h1 a {}
 	top: 0;
 	left: 0;
 }
+
+#slider .fluxslider .surface .caption {
+	background: rgba(0,0,0,0.6);
+	position: absolute;
+	z-index: 110;
+	bottom: 0;
+	right: 0;
+	height: 176px;
+	width: 400px;
+	padding: 12px;
+
+	display: none;
+}
+
+#slider .fluxslider .surface .caption .title {
+	color: #fff;
+	font-size: 24px;
+	line-height: 24px;
+}
+
+#slider .fluxslider .surface .caption .desc {
+	color: #fff;
+}
+	
