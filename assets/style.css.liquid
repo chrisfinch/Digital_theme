@@ -91,6 +91,12 @@ button {
 	margin: 0 auto;
 }
 
+.content-wrapper {
+	margin: 6px 0 0 0;
+	padding: 6px 0 0 0;
+	border-top: 1px solid #333;
+}
+
 /* Header
 ========================================================================*/
 
@@ -112,19 +118,130 @@ header h1 {
 		font-size: 80px;
 		line-height: 100px;
 		display: block;
+		-webkit-transition: all 0.25s linear;  
+		-moz-transition: all 0.25s linear;  
+		-o-transition: all 0.25s linear;  
+		transition: all 0.25s linear;
+	}
+
+	header h1 a:hover {
+		background-color: #333;
+		color: #fff;
 	}
 
 header #umbrella {
 	position: absolute;
 	right: 0;
 	top: 0;	
+	display: none;
 }
+
+header #header-search {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	height: 24px;
+	width: 200px;
+}
+
+	header #header-search label {
+		display: none;
+	}
+
+	header #header-search #top-search-input {
+		border: 1px solid #333;
+		font: {{settings.header_font_style}} 12px/12px {{settings.header_font}};
+		height: 12px;
+		width: 176px;
+		padding-right: 24px;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		outline: none;
+		
+		-webkit-transition: all 0.25s linear;  
+		-moz-transition: all 0.25s linear;  
+		-o-transition: all 0.25s linear;  
+		transition: all 0.25s linear;
+	}
+
+	header #header-search #top-search-input:focus,
+	header #header-search #top-search-input:hover {
+		-moz-box-shadow: 1px 1px 6px 1px #333;
+		-webkit-box-shadow: 1px 1px 6px 1px #333;
+		box-shadow: 1px 1px 6px 1px #333;
+	}
+	
+	header #header-search #top-search-submit {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		height: 24px;
+		width: 24px;
+		background: url('search_icon.png') center center transparent no-repeat;
+		text-indent: -999px;
+		overflow: hidden;
+		border: none;
+		outline: none;
+	}
 
 header nav {
 	position: absolute;
 	right: 0;
 	top: 0;
 }
+
+	header nav ul li {
+		float: left;
+		padding: 0 0 0 6px;
+	}
+
+	header nav ul li a {
+		padding: 6px 12px;
+		font: {{settings.header_font_style}} 14px/1.0 {{settings.header_font}};
+		font-weight: bold;
+		height: 14px;
+		/*text-transform: uppercase;*/
+		display: block;
+		
+		-webkit-transition: all 0.25s linear;  
+		-moz-transition: all 0.25s linear;  
+		-o-transition: all 0.25s linear;  
+		transition: all 0.25s linear;
+		
+	}
+
+	header nav ul li a:hover {
+		color: #fff;
+		background-color: #333;
+	}
+
+	/* Header Tweet
+	========================================================================*/
+
+	#headTweet {
+		position: absolute;
+		top: 38px;
+		left: 268px;
+		width: 308px;
+		height: 46px;
+		background: url('speech.png') 0 0 no-repeat transparent;
+		padding: 12px 24px 28px 24px;
+	}
+	
+		#headTweet .text {
+			width: 308px;
+			font-size: 12px;
+			font: {{settings.header_font_style}} 12px/1.0 {{settings.header_font}};
+			display: inline;
+		}
+		
+		#headTweet .by a {
+			display: inline;
+			padding: 0 0 0 12px;
+		}
+
+		#headTweet .by a:before {content: " - "}
 
 /* Homepage
 ========================================================================*/

@@ -94,6 +94,13 @@
         </a>
       </h1>
       
+		<section id="headTweet">
+			<div class="tweet">
+				<span class="text">I just finished a 3.76 km run with a pace of 4'27"/km with Nike+ GPS. #nikeplus #makeitcount</span>
+				<span class="by"><a href="http://www.twitter.com/chrisfinchy">@chrisfinchy</a></span>
+			</div>
+		</section>
+
       <nav id="top-menu" class="clearfix">
         <ul>
           {% for link in linklists.main-menu.links %}
@@ -117,15 +124,15 @@
           </li>
           {% endfor %}
         </ul>
-
-        {% if settings.show_header_search %}
-        <form id="header-search" action="/search" method="get">
-          <label for="top-search-input" class="visuallyhidden">Search</label>
-          <input type="text" id="top-search-input" name="q" class="search-input" value="" accesskey="4"  autocomplete="off" placeholder="Search" />
-          <input type="submit" id="top-search-submit" class="search-submit ir" value="Search" />
-        </form>
-        {% endif %}
       </nav>
+
+      {% if settings.show_header_search %}
+      <form id="header-search" action="/search" method="get">
+        <label for="top-search-input" class="visuallyhidden">Search</label>
+        <input type="text" id="top-search-input" name="q" class="search-input" value="" accesskey="4"  autocomplete="off" placeholder="Search" />
+        <input type="submit" id="top-search-submit" class="search-submit ir" value="Search" />
+      </form>
+      {% endif %}
             
       <div id="umbrella">
         <ul>          
