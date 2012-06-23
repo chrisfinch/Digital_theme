@@ -1,0 +1,33 @@
+{% if settings.show_slider %}
+
+	{% if settings.slider_collection and collections[settings.slider_collection].products != empty %}
+
+		{% assign col = collections[settings.slider_collection] %}
+
+		<div id="slider">
+
+			<ul class="sliderUl">
+				
+				{% for product in col.products %}
+				
+					<li class="sliderLi">
+						<a class="product-photo" href="{{ product.url | within: collection }}" title="{{ product.featured_image.alt | escape }}">
+							<img src="{{ product.featured_image | product_img_url: 'original' }}" alt="{{ product.featured_image.alt | escape }}" title="{{product.title}}" width="1000" height="500" />
+						
+							<h2 class="title">{{product.title}}</h2>
+						
+						</a>
+					</li>
+				
+				{%endfor%}
+			</ul>
+
+		</div>
+
+	{% else %}
+
+		please add some products to collection: {{settings.slider_collection}} for them to display here
+
+	{% endif %}
+
+{% endif %}

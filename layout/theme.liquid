@@ -50,18 +50,30 @@
     <link href='http://fonts.googleapis.com/css?family=Ubuntu+Condensed' rel='stylesheet' type='text/css'>
   {% endcase %}
 
-  {{ 'style.css' | asset_url | stylesheet_tag }}{% if template contains 'product' and settings.main_image_display == 'Lightbox' %}
-  {{ 'jquery.fancybox-1.3.4.css' | asset_url | stylesheet_tag }}{% endif %}
-  {{ 'modernizr.js' | asset_url | script_tag }}
-  {{ 'option_selection.js' | shopify_asset_url | script_tag }}
+  	<!-- Styles -->
 
-  {% if template contains 'customers' %}
-    {{ "shopify_common.js" | shopify_asset_url | script_tag }}
-    {{ "customer_area.js"  | shopify_asset_url | script_tag }}
-  {% endif %}
+  	{{ 'reset.css' | asset_url | stylesheet_tag }}
+  	{{ 'style.css' | asset_url | stylesheet_tag }}
+	
+  	{% if template contains 'product' and settings.main_image_display == 'Lightbox' %}
+    	{{ 'jquery.fancybox-1.3.4.css' | asset_url | stylesheet_tag }}
+  	{% endif %}
 
-  {{ '//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js' | script_tag }}
+  	<!-- Scripts -->
+
+  	{{ 'modernizr.js' | asset_url | script_tag }}
+  	{{ 'option_selection.js' | shopify_asset_url | script_tag }}
+
+  	{% if template contains 'customers' %}
+    	{{ "shopify_common.js" | shopify_asset_url | script_tag }}
+    	{{ "customer_area.js"  | shopify_asset_url | script_tag }}
+  	{% endif %}
+
+  	{{ '//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js' | script_tag }}
  
+	{{ 'flux.js' | asset_url | script_tag }}
+	{{ 'digital.js' | asset_url | script_tag }}
+
 </head>
 
 <body class="{% if customer %}customer-logged-in {% endif %}template{{ template | split: '.' | first | camelize }}">
@@ -70,7 +82,7 @@
   <div class="wrapper">
     
     <!-- Header -->
-    <header id="top" class="clearfix">
+    <header>
 
       <h1 id="site-title">
         <a href="/" title="Home">
@@ -150,22 +162,28 @@
     </header>
     
     <!-- Content -->
-    <div class="content-wrapper clearfix">    
+    <section class="content-wrapper clearfix">    
 
       {% if template == 'list-collections' %}
         {% include 'collection-listing' %}
       {% else %}
+
+		<!-- CONTENT HERE -->
+
         {{ content_for_layout }}
+
+		<!-- END CONTENT -->
+
       {% endif %}
 
       {% unless template contains "customer" or template contains "cart" %}
         {% include 'col-widgets' %}
       {% endunless %}
 
-    </div><!-- /.content -->
+    </section><!-- /.content -->
     
     <!-- Footer -->
-    <footer id="bottom">
+    <footer>
 
       <div id="footer-left">
         <ul id="footer-nav" class="clearfix">
